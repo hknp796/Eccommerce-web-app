@@ -11,6 +11,12 @@
           <div class="size">7</div>
           <div class="size">8</div>
         </div>
+        <div>
+          <v-btn block class="mb-7 mt-7" dark color="#00000" rounded
+            >Add To Cart</v-btn
+          >
+          <v-btn block outlined rounded>Buy Now</v-btn>
+        </div>
       </div>
     </div>
   </div>
@@ -29,7 +35,6 @@ export default {
       'fetchSingleproduct',
       this.$route.params.id
     )
-    console.log(this.$store.state.singleProduct)
   },
 }
 </script>

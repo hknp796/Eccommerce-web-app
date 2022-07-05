@@ -19,7 +19,6 @@ export async function fetchProducts() {
 
 export async function fetchSingleProduct(id) {
   const response = await axios.get(url(`/${id}`))
-  console.log(response, 'single produt cms')
   if (response.status === 200) {
     return response.data
   }
