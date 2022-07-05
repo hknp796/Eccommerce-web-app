@@ -13,7 +13,7 @@
           :src="item.imageURL"
           width="400"
           height="400"
-          @click="clicked(item.id)"
+          @click="clicked(item._id)"
         ></v-img>
         <h4>{{ item.name }}</h4>
         <p>{{ item.gender }} {{ item.category }}</p>
@@ -53,6 +53,7 @@ export default {
   methods: {
     clicked(id) {
       this.$router.push(`/ProductDetails/${id}`)
+      this.$store.dispatch('fetchSingleproduct', id)
     },
   },
 }

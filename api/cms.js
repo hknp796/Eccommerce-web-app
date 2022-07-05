@@ -1,6 +1,6 @@
 import axios from 'axios'
 function baseUrl() {
-  return 'http://localhost:5001'
+  return 'http://localhost:8080/api'
 }
 
 function url(path) {
@@ -8,9 +8,18 @@ function url(path) {
 }
 
 export async function fetchProducts() {
-  const response = await axios.get(url('/products'))
-  console.log(response.data, 'response')
+  const response = await axios.get(url('/allproducts'))
 
+  if (response.status === 200) {
+    return response.data
+  }
+
+  throw new Error(`${response.data}`)
+}
+
+export async function fetchSingleProduct(id) {
+  const response = await axios.get(url(`/${id}`))
+  console.log(response, 'single produt cms')
   if (response.status === 200) {
     return response.data
   }
