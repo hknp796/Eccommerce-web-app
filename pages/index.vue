@@ -53,7 +53,6 @@ export default {
   methods: {
     clicked(id) {
       this.$router.push(`/ProductDetails/${id}`)
-      this.$store.dispatch('fetchSingleproduct', id)
     },
   },
 }
