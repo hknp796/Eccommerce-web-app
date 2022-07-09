@@ -1,7 +1,15 @@
 <template>
   <div>
-    <div v-if="getProductsData" class="d-flex wrapper mt-10">
-      <v-img :src="getProductsData.imageURL" width="400" height="450"></v-img>
+    <div v-show="getProductsData" class="d-flex wrapper mt-10">
+      <div class="images">
+        <v-img
+          v-for="(image, index) in getProductsData.Images"
+          :key="index"
+          :src="image"
+          width="400"
+          height="450"
+        ></v-img>
+      </div>
       <div class="ml-10">
         <h4>{{ getProductsData.name }}</h4>
         <h5>$ {{ getProductsData.price }}</h5>
@@ -48,6 +56,7 @@ export default {
       'fetchSingleproduct',
       this.$route.params.id
     )
+    console.log(this.getProductsData, 'product')
   },
   methods: {
     getSize(size) {
@@ -81,5 +90,12 @@ export default {
   justify-content: center;
   margin: 10px;
   border-radius: 10px;
+}
+
+.images {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 10px;
+  row-gap: 10px;
 }
 </style>

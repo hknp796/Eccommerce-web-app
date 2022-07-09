@@ -10,7 +10,7 @@
     <div class="d-flex wrappers">
       <div v-for="(item, index) in products" :key="index" class="pa-3 ml-5">
         <v-img
-          :src="item.imageURL"
+          :src="item.Images[0]"
           width="400"
           height="400"
           @click="clicked(item._id)"
@@ -43,6 +43,7 @@ export default {
 
   computed: {
     products() {
+      console.log(this.$store.state.products)
       return this.$store.state.products
     },
   },
