@@ -1,25 +1,6 @@
 <template>
-  <div>
-    <v-carousel hide-delimiters class="wrapper" height="800">
-      <v-carousel-item
-        v-for="(item, i) in items"
-        :key="i"
-        :src="item.src"
-      ></v-carousel-item>
-    </v-carousel>
-    <div class="d-flex wrappers">
-      <div v-for="(item, index) in products" :key="index" class="pa-3 ml-5">
-        <v-img
-          :src="item.Images[0]"
-          width="400"
-          height="400"
-          @click="clicked(item._id)"
-        ></v-img>
-        <h4>{{ item.name }}</h4>
-        <p>{{ item.gender }} {{ item.category }}</p>
-        <h3>$ {{ item.price }}</h3>
-      </div>
-    </div>
+  <div v-if="mensClothing">
+    <h1 class="text-center mt-16">{{ mensClothing.heading }}</h1>
   </div>
 </template>
 
@@ -42,9 +23,14 @@ export default {
   },
 
   computed: {
-    products() {
-      console.log(this.$store.state.products)
-      return this.$store.state.products
+    mensClothing() {
+      return this.sections.find(
+        (section) => section.heading === "MEN'S CLOTHS COLLECTION"
+      )
+    },
+    sections() {
+      console.log(this.$store.state.homeProducts)
+      return this.$store.state.homeProducts
     },
   },
   mounted() {

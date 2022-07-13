@@ -1,13 +1,15 @@
 import { fetchProducts, fetchSingleProduct } from '@/api/cms'
 
 export const state = () => ({
-  products: [],
+  homeProducts: [],
+  allProducts: [],
   singleProduct: [],
 })
 
 export const mutations = {
   products: (state, products) => {
-    state.products = products
+    state.homeProducts = products.homeProducts
+    state.allProducts = products.AllProducts
   },
   singleProduct: (state, singleProduct) => {
     console.log(singleProduct, 'mutations')
