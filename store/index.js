@@ -1,15 +1,17 @@
-import { fetchProducts, fetchSingleProduct } from '@/api/cms'
+import { fetchCloths, fetchShoes, fetchSingleProduct } from '@/api/cms'
 
 export const state = () => ({
-  homeProducts: [],
-  allProducts: [],
+  cloths: [],
+  shoes: [],
   singleProduct: [],
 })
 
 export const mutations = {
-  products: (state, products) => {
-    state.homeProducts = products.homeProducts
-    state.allProducts = products.AllProducts
+  cloths: (state, products) => {
+    state.cloths = products
+  },
+  shoes: (state, products) => {
+    state.shoes = products
   },
   singleProduct: (state, singleProduct) => {
     console.log(singleProduct, 'mutations')
@@ -18,9 +20,13 @@ export const mutations = {
 }
 
 export const actions = {
-  async products(ctx) {
-    const products = await fetchProducts()
-    ctx.commit('products', products)
+  async clothProducts(ctx) {
+    const products = await fetchCloths()
+    ctx.commit('cloths', products)
+  },
+  async shoeProducts(ctx) {
+    const products = await fetchShoes()
+    ctx.commit('shoes', products)
   },
   async fetchSingleproduct(ctx, id) {
     const singleProduct = await fetchSingleProduct(id)

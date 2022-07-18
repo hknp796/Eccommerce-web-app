@@ -7,8 +7,8 @@ function url(path) {
   return baseUrl() + path
 }
 
-export async function fetchProducts() {
-  const response = await axios.get(url('/allproducts'))
+export async function fetchCloths() {
+  const response = await axios.get(url('/cloths'))
 
   if (response.status === 200) {
     return response.data
@@ -17,6 +17,15 @@ export async function fetchProducts() {
   throw new Error(`${response.data}`)
 }
 
+export async function fetchShoes() {
+  const response = await axios.get(url('/shoes'))
+
+  if (response.status === 200) {
+    return response.data
+  }
+
+  throw new Error(`${response.data}`)
+}
 export async function fetchSingleProduct(id) {
   const response = await axios.get(url(`/${id}`))
   if (response.status === 200) {
