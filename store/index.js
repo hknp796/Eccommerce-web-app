@@ -1,4 +1,9 @@
-import { fetchCloths, fetchShoes, fetchSingleProduct } from '@/api/cms'
+import {
+  fetchCloths,
+  fetchShoes,
+  fetchSingleProduct,
+  fetchMenProducts,
+} from '@/api/cms'
 
 export const state = () => ({
   cloths: [],
@@ -31,5 +36,9 @@ export const actions = {
   async fetchSingleproduct(ctx, id) {
     const singleProduct = await fetchSingleProduct(id)
     return singleProduct
+  },
+  async getMenProducts(ctx) {
+    const menProducts = await fetchMenProducts()
+    return menProducts
   },
 }

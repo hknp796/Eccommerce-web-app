@@ -10,19 +10,12 @@
             :key="index"
             :cols="index === 0 ? 12 : 6"
           >
-            <v-img :src="image" aspect-ratio="1.8"></v-img>
+            <v-img
+              :src="image"
+              aspect-ratio="1.8"
+              @click="clicked(item._id)"
+            ></v-img>
           </v-col>
-          <!-- <v-col>
-            <v-img :src="item.img[0]" aspect-ratio="1.8"></v-img>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="6">
-            <v-img :src="item.img[1]" aspect-ratio="1.8"></v-img>
-          </v-col>
-          <v-col cols="6">
-            <v-img :src="item.img[2]" aspect-ratio="1.8"></v-img>
-          </v-col> -->
         </v-row>
       </div>
     </div>
@@ -37,7 +30,11 @@
             md="3"
             cols="6"
           >
-            <v-img :src="image" aspect-ratio=".8"></v-img>
+            <v-img
+              :src="image"
+              aspect-ratio=".8"
+              @click="clicked(item._id)"
+            ></v-img>
           </v-col>
         </v-row>
       </div>

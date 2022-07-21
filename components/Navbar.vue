@@ -2,19 +2,25 @@
   <div>
     <div class="d-flex align-center justify-space-around mt-13">
       <h1>SOLO</h1>
-      <div class="text-field">
-        <v-text-field
-          placeholder="I'm Looking for"
-          solo
-          rounded
-          append-icon="mdi-magnify"
-          hide-details="true"
-        ></v-text-field>
-      </div>
       <div class="d-flex">
-        <v-icon> mdi-phone </v-icon>
-        <v-icon class="ml-12"> mdi-account </v-icon>
-        <v-icon class="ml-12"> mdi-cart-outline </v-icon>
+        <h4>Men</h4>
+        <h4 class="ml-6 mr-6">Woman</h4>
+        <h4>Kids</h4>
+      </div>
+
+      <div class="d-flex justify-space-between">
+        <div class="text-field">
+          <v-text-field
+            prepend-inner-icon="mdi-magnify"
+            filled
+            rounded
+            dense
+            placeholder="Search"
+            hide-details="true"
+          ></v-text-field>
+        </div>
+        <v-icon class="ml-6 mr-6"> mdi-heart-outline </v-icon>
+        <v-icon> mdi-shopping-outline </v-icon>
       </div>
     </div>
   </div>
@@ -26,6 +32,6 @@ export default {}
 
 <style scoped>
 .text-field {
-  width: 400px;
+  width: 200px;
 }
 </style>

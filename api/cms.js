@@ -26,6 +26,15 @@ export async function fetchShoes() {
 
   throw new Error(`${response.data}`)
 }
+export async function fetchMenProducts() {
+  const response = await axios.get(url('/men'))
+
+  if (response.status === 200) {
+    return response.data
+  }
+
+  throw new Error(`${response.data}`)
+}
 export async function fetchSingleProduct(id) {
   const response = await axios.get(url(`/${id}`))
   if (response.status === 200) {
