@@ -65,7 +65,7 @@ export default {
 
   methods: {
     clicked(id) {
-      this.$router.push(`/ProductDetails/${id}`)
+      this.$router.push('menProducts')
     },
   },
 }
