@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ men }}
+    {{ menProducts }}
   </div>
 </template>
 
@@ -11,8 +11,13 @@ export default {
       men: '',
     }
   },
-  async mounted() {
-    this.men = await this.$store.dispatch('getMenProducts')
+  computed: {
+    menProducts() {
+      return this.$store.state.menProducts
+    },
+  },
+  mounted() {
+    this.$store.dispatch('getMenProducts')
   },
 }
 </script>

@@ -3,12 +3,16 @@ import {
   fetchShoes,
   fetchSingleProduct,
   fetchMenProducts,
+  fetchWomenProducts,
+  fetchKidsProducts,
 } from '@/api/cms'
 
 export const state = () => ({
   cloths: [],
   shoes: [],
-  singleProduct: [],
+  menProducts: [],
+  womenProducts: [],
+  kidsProducts: [],
 })
 
 export const mutations = {
@@ -18,9 +22,14 @@ export const mutations = {
   shoes: (state, products) => {
     state.shoes = products
   },
-  singleProduct: (state, singleProduct) => {
-    console.log(singleProduct, 'mutations')
-    state.singleProduct = singleProduct
+  menProducts: (state, menproducts) => {
+    state.menProducts = menproducts
+  },
+  womenProducts: (state, womenproducts) => {
+    state.womenProducts = womenproducts
+  },
+  kidsProducts: (state, kidsProducts) => {
+    state.kidsProducts = kidsProducts
   },
 }
 
@@ -39,6 +48,14 @@ export const actions = {
   },
   async getMenProducts(ctx) {
     const menProducts = await fetchMenProducts()
-    return menProducts
+    ctx.commit('menProducts', menProducts)
+  },
+  async getWomenProducts(ctx) {
+    const womenProducts = await fetchWomenProducts()
+    ctx.commit('womenProducts', womenProducts)
+  },
+  async getKidsProducts(ctx) {
+    const kidsProducts = await fetchKidsProducts()
+    ctx.commit('kidsProducts', kidsProducts)
   },
 }

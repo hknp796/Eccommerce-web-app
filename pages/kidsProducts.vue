@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ womenProducts }}
+    {{ kidsProducts }}
   </div>
 </template>
 
@@ -12,12 +12,12 @@ export default {
     }
   },
   computed: {
-    womenProducts() {
-      return this.$store.state.womenProducts
+    kidsProducts() {
+      return this.$store.state.kidsProducts
     },
   },
   mounted() {
-    this.$store.dispatch('getWomenProducts')
+    this.$store.dispatch('getKidsProducts')
   },
 }
 </script>
