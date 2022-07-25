@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="d-flex align-center justify-space-around mt-13">
-      <h1>SOLO</h1>
+      <nuxt-link to="/" class="link">
+        <h1>SOLO</h1>
+      </nuxt-link>
       <div class="d-flex">
         <nuxt-link class="link" to="/menProducts">
           <h4>Men</h4>
