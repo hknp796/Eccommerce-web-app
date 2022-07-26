@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ womenProducts }}
+    <product-list v-if="womenProducts.length > 0" :products="womenProducts" />
   </div>
 </template>
 

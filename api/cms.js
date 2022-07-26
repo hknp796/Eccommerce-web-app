@@ -55,3 +55,13 @@ export async function fetchKidsProducts() {
 
   throw new Error(`${response.data}`)
 }
+export async function fetchSingleProduct(id) {
+  console.log(id, 'cms')
+  const response = await axios.get(url(`/${id}`))
+
+  if (response.status === 200) {
+    return response.data
+  }
+
+  throw new Error(`${response.data}`)
+}

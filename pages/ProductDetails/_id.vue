@@ -3,7 +3,7 @@
     <div v-show="getProductsData" class="d-flex wrapper mt-10">
       <div class="images">
         <v-img
-          v-for="(image, index) in getProductsData.Images"
+          v-for="(image, index) in getProductsData.img"
           :key="index"
           :src="image"
           width="400"
@@ -11,14 +11,16 @@
         ></v-img>
       </div>
       <div class="ml-10">
-        <h4>{{ getProductsData.name }}</h4>
-        <h5>$ {{ getProductsData.price }}</h5>
-        <div class="d-flex align-center">
-          <h4>Size</h4>
+        <h2>{{ getProductsData.title }}</h2>
+        <p>{{ getProductsData.category }}</p>
+        <h4>$ {{ getProductsData.price }}</h4>
+        <h4 class="mt-10">Select Size</h4>
+        <div class="d-flex">
           <v-btn
-            v-for="size in size"
+            v-for="size in getProductsData.size"
             :key="size"
-            class="size"
+            class="mx-2 mt-6"
+            outlined
             @click="getSize(size)"
           >
             {{ size }}
@@ -27,14 +29,13 @@
         <div>
           <v-btn
             block
-            class="mb-7 mt-7"
+            class="mb-7 mt-7 px-10 py-8"
             dark
-            color="#00000"
-            rounded
+            color="black"
             @click="addToCart"
             >Add To Cart</v-btn
           >
-          <v-btn block outlined rounded>Buy Now</v-btn>
+          <v-btn class="mb-7 mt-7 px-10 py-8" block outlined>Favorite</v-btn>
         </div>
       </div>
     </div>
@@ -51,11 +52,12 @@ export default {
     }
   },
 
-  async created() {
+  async mounted() {
     this.getProductsData = await this.$store.dispatch(
       'fetchSingleproduct',
       this.$route.params.id
     )
+
     console.log(this.getProductsData, 'product')
   },
   methods: {
@@ -78,18 +80,6 @@ export default {
 <style scoped>
 .wrapper {
   width: 50%;
-  margin: auto;
-}
-
-.size {
-  width: 50px;
-  height: 50px;
-  background-color: rgb(193 193 193);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10px;
-  border-radius: 10px;
 }
 
 .images {
@@ -97,5 +87,9 @@ export default {
   grid-template-columns: repeat(2, 1fr);
   column-gap: 10px;
   row-gap: 10px;
+}
+
+.v-btn {
+  border-radius: 50px !important ;
 }
 </style>

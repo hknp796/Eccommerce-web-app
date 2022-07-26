@@ -2,8 +2,6 @@
   <div>
     <v-row>
       <v-col cols="3">
-        <!-- {{ products }} -->
-
         <v-list>
           <v-list-group v-for="item in items" :key="item.title">
             <template #activator>
@@ -24,8 +22,14 @@
         </v-list>
       </v-col>
       <v-col cols="9">
-        <v-row>
-          <v-col v-for="product in products" :key="product._id" cols="4">
+        <v-row
+          >{{ products }}
+          <v-col
+            v-for="product in products"
+            :key="product._id"
+            cols="4"
+            @click="singleProduct(product._id, product.gender)"
+          >
             <v-img :src="product.img[0]" width="100%" height="auto"></v-img>
             <h4>{{ product.title }}</h4>
             <p>{{ product.description }}</p>
@@ -72,6 +76,10 @@ export default {
   methods: {
     check(e) {
       console.log(e, this.newone)
+    },
+    singleProduct(id, gender) {
+      console.log(id)
+      this.$router.push(`/ProductDetails/${id}`)
     },
   },
 }

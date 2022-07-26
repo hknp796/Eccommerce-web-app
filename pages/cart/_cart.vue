@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="cartData" class="d-flex wrapper mt-10">
-      <v-img :src="cartData.Images[0]" class="image"></v-img>
+      <v-img :src="cartData.img[0]" class="image"></v-img>
       <div class="ml-10">
         <h4>{{ cartData.name }}</h4>
         <p class="mt-5">{{ cartData.category }}</p>

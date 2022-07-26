@@ -5,9 +5,7 @@
 </template>
 
 <script>
-import productList from '~/components/productList.vue'
 export default {
-  components: { productList },
   data() {
     return {
       products: [],
