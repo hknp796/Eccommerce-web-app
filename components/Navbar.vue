@@ -28,14 +28,31 @@
           ></v-text-field>
         </div>
         <v-icon class="ml-6 mr-6"> mdi-heart-outline </v-icon>
-        <v-icon> mdi-shopping-outline </v-icon>
+        <v-badge
+          :value="cartCount"
+          offset-y="18"
+          offset-x="12"
+          :content="cartCount"
+        >
+          <v-icon size="30"> mdi-shopping-outline</v-icon>
+        </v-badge>
+        {{ cartCount }}
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      cartCount: 0,
+    }
+  },
+  mounted() {
+    this.cartCount = JSON.parse(localStorage.getItem('toCart'))?.length
+  },
+}
 </script>
 
 <style scoped>

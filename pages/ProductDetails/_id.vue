@@ -14,8 +14,8 @@
       </v-col>
       <v-col cols="4" class="ml-10">
         <h2>{{ getProductsData.title }}</h2>
-        <p>{{ getProductsData.category }}</p>
-        <h4>$ {{ getProductsData.price }}</h4>
+        <p>{{ getProductsData.description }}</p>
+        <h4>₹ {{ getProductsData.price }}</h4>
         <h4 class="mt-10">Select Size</h4>
         <div class="d-flex">
           <v-btn
@@ -49,8 +49,8 @@ export default {
   data() {
     return {
       getProductsData: [],
-      size: [6, 7, 8],
       cartData: {},
+      selectedProduct: [],
     }
   },
 
@@ -67,13 +67,17 @@ export default {
       this.cartData.size = size
     },
     addToCart() {
-      this.cartData.productDetails = this.getProductsData
-      if (this.cartData.size) {
-        const id = this.getProductsData._id
-        this.$router.push(`/cart/${id}`)
-      } else {
-        alert('Select Size')
-      }
+      this.selectedProduct.push({ ...this.getProductsData })
+      const data = JSON.stringify(this.selectedProduct)
+      console.log(data, 'localstorage')
+      localStorage.setItem('toCart', data)
+      // this.cartData.productDetails = this.getProductsData
+      // if (this.cartData.size) {
+      //   const id = this.getProductsData._id
+      //   this.$router.push(`/cart/${id}`)
+      // } else {
+      //   alert('Select Size')
+      // }
     },
   },
 }

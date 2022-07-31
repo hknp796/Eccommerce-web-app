@@ -3,17 +3,25 @@
     <div v-if="cartData" class="">
       <v-row class="ma-10">
         <v-col cols="8">
-          <v-row class="ma-10">
+          <v-row class="">
             <v-col cols="3">
               <v-img :src="cartData.img[0]" class="image"></v-img>
             </v-col>
-            <v-col cols="7">
+            <v-col cols="9">
               <div>
-                <h4>{{ cartData.name }}</h4>
-                <p class="mt-5">{{ cartData.category }}</p>
-                <div class="d-flex">
-                  <p class="mr-7 mt-1">Size : 6</p>
-                  <p>
+                <div class="d-flex justify-space-between">
+                  <h4>{{ cartData.title }}</h4>
+                  <h4>
+                    ₹
+                    {{
+                      parseFloat(cartData.price).toFixed(2).replace(/[,]/, '.')
+                    }}
+                  </h4>
+                </div>
+                <p class="mb-0">{{ cartData.description }}</p>
+                <div class="d-flex align-center">
+                  <p class="mr-5 mb-0">Size : 6</p>
+                  <div>
                     Quantity :
                     <v-btn icon @click="quantityDecrease">
                       <v-icon>mdi-minus-circle-outline</v-icon></v-btn
@@ -21,9 +29,9 @@
                     }}<v-btn icon @click="quantityIncrease">
                       <v-icon>mdi-plus-circle-outline</v-icon></v-btn
                     >
-                  </p>
+                  </div>
                 </div>
-                <v-icon>mdi-delete</v-icon>
+                <v-icon>mdi-trash-can-outline</v-icon>
               </div>
             </v-col>
           </v-row>
@@ -35,16 +43,12 @@
               Price <span> ₹ {{ cartData.price }}</span>
             </p>
             <p>Delivery Charge <span>₹ 50</span></p>
-            <p>
+            <v-divider> </v-divider>
+            <p class="py-5 mb-0">
               Total <span>₹ {{ cartData.price + 50 }}</span>
             </p>
-            <v-btn
-              block
-              class="mb-7 mt-7"
-              height="50"
-              dark
-              color="#00000"
-              rounded
+            <v-divider> </v-divider>
+            <v-btn block class="mt-8" height="50" dark color="black" rounded
               >Place Order</v-btn
             >
           </div>
@@ -86,8 +90,8 @@ export default {
 }
 
 .image {
-  max-width: 300px;
-  max-height: 200px;
+  max-width: 250px;
+  max-height: 150px;
   object-fit: contain;
 }
 </style>
