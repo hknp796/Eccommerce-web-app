@@ -22,8 +22,7 @@
         </v-list>
       </v-col>
       <v-col cols="9">
-        <v-row
-          >{{ products }}
+        <v-row>
           <v-col
             v-for="product in products"
             :key="product._id"
@@ -73,6 +72,7 @@ export default {
       newone: '',
     }
   },
+
   methods: {
     check(e) {
       console.log(e, this.newone)

@@ -1,16 +1,18 @@
 <template>
-  <div>
-    <div v-show="getProductsData" class="d-flex wrapper mt-10">
-      <div class="images">
-        <v-img
-          v-for="(image, index) in getProductsData.img"
-          :key="index"
-          :src="image"
-          width="400"
-          height="450"
-        ></v-img>
-      </div>
-      <div class="ml-10">
+  <div v-show="getProductsData" class="wrapper mt-10">
+    <v-row>
+      <v-col cols="7" class="ml-10">
+        <div class="images">
+          <v-img
+            v-for="(image, index) in getProductsData.img"
+            :key="index"
+            :src="image"
+            width="400"
+            height="450"
+          ></v-img>
+        </div>
+      </v-col>
+      <v-col cols="4" class="ml-10">
         <h2>{{ getProductsData.title }}</h2>
         <p>{{ getProductsData.category }}</p>
         <h4>$ {{ getProductsData.price }}</h4>
@@ -37,8 +39,8 @@
           >
           <v-btn class="mb-7 mt-7 px-10 py-8" block outlined>Favorite</v-btn>
         </div>
-      </div>
-    </div>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -78,10 +80,6 @@ export default {
 </script>
 
 <style scoped>
-.wrapper {
-  width: 50%;
-}
-
 .images {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

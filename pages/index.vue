@@ -50,11 +50,9 @@ export default {
 
   computed: {
     clothSection() {
-      console.log(this.$store.state.cloths)
       return this.$store.state.cloths
     },
     shoeSection() {
-      console.log(this.$store.state.shoes)
       return this.$store.state.shoes
     },
   },
