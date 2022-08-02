@@ -59,18 +59,14 @@ export default {
       'fetchSingleproduct',
       this.$route.params.id
     )
-
-    console.log(this.getProductsData, 'product')
   },
   methods: {
     getSize(size) {
       this.cartData.size = size
     },
     addToCart() {
-      this.selectedProduct.push({ ...this.getProductsData })
-      const data = JSON.stringify(this.selectedProduct)
-      console.log(data, 'localstorage')
-      localStorage.setItem('toCart', data)
+      this.$store.dispatch('addToCart', this.getProductsData)
+
       // this.cartData.productDetails = this.getProductsData
       // if (this.cartData.size) {
       //   const id = this.getProductsData._id

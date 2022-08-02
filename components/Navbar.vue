@@ -33,10 +33,10 @@
           offset-y="18"
           offset-x="12"
           :content="cartCount"
+          color="black"
         >
-          <v-icon size="30"> mdi-shopping-outline</v-icon>
+          <v-icon size="30" @click="toCart"> mdi-shopping-outline</v-icon>
         </v-badge>
-        {{ cartCount }}
       </div>
     </div>
   </div>
@@ -45,12 +45,17 @@
 <script>
 export default {
   data() {
-    return {
-      cartCount: 0,
-    }
+    return {}
   },
-  mounted() {
-    this.cartCount = JSON.parse(localStorage.getItem('toCart'))?.length
+  computed: {
+    cartCount() {
+      return this.$store.state.cartData.length
+    },
+  },
+  methods: {
+    toCart() {
+      this.$router.push(`/cart`)
+    },
   },
 }
 </script>

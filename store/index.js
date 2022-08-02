@@ -13,6 +13,7 @@ export const state = () => ({
   menProducts: [],
   womenProducts: [],
   kidsProducts: [],
+  cartData: [],
 })
 
 export const mutations = {
@@ -30,6 +31,12 @@ export const mutations = {
   },
   kidsProducts: (state, kidsProducts) => {
     state.kidsProducts = kidsProducts
+  },
+  cartData: (state, cartData) => {
+    const oldData = JSON.parse(localStorage.getItem('toCart') || '[]')
+    state.cartData = oldData
+    oldData.push(cartData)
+    localStorage.setItem('toCart', JSON.stringify(oldData))
   },
 }
 
@@ -57,5 +64,8 @@ export const actions = {
   async getKidsProducts(ctx) {
     const kidsProducts = await fetchKidsProducts()
     ctx.commit('kidsProducts', kidsProducts)
+  },
+  async addToCart({ commit }, cartData) {
+    await commit('cartData', cartData)
   },
 }
