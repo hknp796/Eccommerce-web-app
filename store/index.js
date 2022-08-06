@@ -33,11 +33,17 @@ export const mutations = {
     state.kidsProducts = kidsProducts
   },
   cartData: (state, cartData) => {
-    const oldData = JSON.parse(localStorage.getItem('toCart') || '[]')
-    state.cartData = oldData
-    oldData.push(cartData)
-    localStorage.setItem('toCart', JSON.stringify(oldData))
+    // const oldData = JSON.parse(localStorage.getItem('toCart') || '[]')
+    state.cartData.push(cartData)
+
+    localStorage.setItem('toCart', JSON.stringify(state.cartData))
   },
+  initializeCart: (state, filter) => {
+    state.cartData = filter
+  },
+  // removCart: (state, data) => {
+  //   state.cartData = data
+  // },
 }
 
 export const actions = {
@@ -67,5 +73,18 @@ export const actions = {
   },
   async addToCart({ commit }, cartData) {
     await commit('cartData', cartData)
+  },
+
+  initializeCart({ commit }, cartData) {
+    commit('initializeCart', cartData)
+  },
+  async removeCartData({ commit }, id) {
+    const old = await JSON.parse(localStorage.getItem('toCart'))
+    const filtered = old.filter((item) => {
+      return item._id === id
+    })
+    console.log(filtered)
+    localStorage.setItem('greetings', JSON.stringify(filtered))
+    commit('initializeCart', filtered)
   },
 }

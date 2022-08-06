@@ -1,57 +1,66 @@
 <template>
   <div>
-    <v-row class="ma-10">
-      <v-col v-for="cartData in cartItems" :key="cartData._id" cols="8">
-        <v-row class="">
-          <v-col cols="3">
-            <v-img :src="cartData.img[0]" class="image"></v-img>
-          </v-col>
-          <v-col cols="9">
-            <div>
-              <div class="d-flex justify-space-between">
-                <h4>{{ cartData.title }}</h4>
-                <h4>
-                  ₹
-                  {{
-                    parseFloat(cartData.price).toFixed(2).replace(/[,]/, '.')
-                  }}
-                </h4>
-              </div>
-              <p class="mb-0">{{ cartData.description }}</p>
-              <div class="d-flex align-center">
-                <p class="mr-5 mb-0">Size : 6</p>
+    <v-container class="mt-15">
+      <v-row>
+        <v-col cols="7">
+          <div v-for="cartData in cartItems" :key="cartData._id">
+            <v-row class="">
+              <v-col cols="3">
+                <v-img :src="cartData.img[0]" class="image"></v-img>
+              </v-col>
+              <v-col cols="9">
                 <div>
-                  Quantity :
-                  <v-btn icon @click="quantityDecrease">
-                    <v-icon>mdi-minus-circle-outline</v-icon></v-btn
-                  >{{ quantity
-                  }}<v-btn icon @click="quantityIncrease">
-                    <v-icon>mdi-plus-circle-outline</v-icon></v-btn
-                  >
+                  <div class="d-flex justify-space-between">
+                    <h4>{{ cartData.title }}</h4>
+                    <h4>
+                      ₹
+                      {{
+                        parseFloat(cartData.price)
+                          .toFixed(2)
+                          .replace(/[,]/, '.')
+                      }}
+                    </h4>
+                  </div>
+                  <p class="mb-0">{{ cartData.description }}</p>
+                  <div class="d-flex align-center">
+                    <p class="mr-5 mb-0">Size : 6</p>
+                    <div>
+                      Quantity :
+                      <v-btn icon @click="quantityDecrease">
+                        <v-icon>mdi-minus-circle-outline</v-icon></v-btn
+                      >{{ quantity
+                      }}<v-btn icon @click="quantityIncrease">
+                        <v-icon>mdi-plus-circle-outline</v-icon></v-btn
+                      >
+                    </div>
+                  </div>
+                  <v-btn icon @click="deleteCartItem(cartData._id)">
+                    <v-icon>mdi-trash-can-outline</v-icon>
+                  </v-btn>
                 </div>
-              </div>
-              <v-icon>mdi-trash-can-outline</v-icon>
-            </div>
-          </v-col>
-        </v-row>
-      </v-col>
-
-      <div class="summary">
-        <h4 class="mb-5">Summary</h4>
-        <p>
-          Price <span> ₹ {{ 666 }}</span>
-        </p>
-        <p>Delivery Charge <span>₹ 50</span></p>
-        <v-divider> </v-divider>
-        <p class="py-5 mb-0">
-          Total <span>₹ {{ 66 + 50 }}</span>
-        </p>
-        <v-divider> </v-divider>
-        <v-btn block class="mt-8" height="50" dark color="black" rounded
-          >Place Order</v-btn
-        >
-      </div>
-    </v-row>
+              </v-col>
+            </v-row>
+          </div>
+        </v-col>
+        <v-col cols="4" offset="1">
+          <div class="summary">
+            <h4 class="mb-5">Summary</h4>
+            <p>
+              Price <span> ₹ {{ totalPrice }}</span>
+            </p>
+            <p>Delivery Charge <span>₹ 50</span></p>
+            <v-divider> </v-divider>
+            <p class="py-5 mb-0">
+              Total <span>₹ {{ totalPrice + 50 }}</span>
+            </p>
+            <v-divider> </v-divider>
+            <v-btn block class="mt-8" height="50" dark color="black" rounded
+              >Place Order</v-btn
+            >
+          </div>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
@@ -59,12 +68,16 @@
 export default {
   data() {
     return {
-      cartItems: '',
       quantity: 1,
     }
   },
-  mounted() {
-    this.cartItems = JSON.parse(localStorage.getItem('toCart') || '[]')
+  computed: {
+    cartItems() {
+      return this.$store.state.cartData
+    },
+    totalPrice() {
+      return this.cartItems.reduce((acc, item) => acc + item.price, 0)
+    },
   },
   methods: {
     quantityDecrease() {
@@ -73,6 +86,17 @@ export default {
     },
     quantityIncrease() {
       this.quantity++
+    },
+    deleteCartItem(id) {
+      // console.log(id)
+
+      const old = this.cartItems
+      console.log(typeof old)
+      const newCart = old.splice((item) => {
+        return item._id !== id
+      })
+      console.log(newCart)
+      // this.$store.dispatch('removeCartData', newCart)
     },
   },
 }

@@ -65,15 +65,16 @@ export default {
       this.cartData.size = size
     },
     addToCart() {
-      this.$store.dispatch('addToCart', this.getProductsData)
-
-      // this.cartData.productDetails = this.getProductsData
-      // if (this.cartData.size) {
-      //   const id = this.getProductsData._id
-      //   this.$router.push(`/cart/${id}`)
-      // } else {
-      //   alert('Select Size')
-      // }
+      const data = this.getProductsData
+      const cartData = JSON.parse(localStorage.getItem('toCart') || '[]')
+      const exists = cartData.some((field) => {
+        return field._id === data._id
+      })
+      if (!exists) {
+        this.$store.dispatch('addToCart', this.getProductsData)
+      } else {
+        alert('already exist')
+      }
     },
   },
 }
