@@ -57,6 +57,14 @@ export default {
       sizeSelected: '',
     }
   },
+  computed: {
+    getProductsData() {
+      return Object.assign({}, { ...this.getProducts })
+    },
+    sizes() {
+      return Object.assign({}, { ...this.getProducts.size })
+    },
+  },
 
   async mounted() {
     this.getProducts = await this.$store.dispatch(
@@ -67,14 +75,6 @@ export default {
     // console.log({ ...getProducts })
     // this.getProductsData = Object.assign({}, { ...getProducts })
     // this.sizes = Object.assign({}, { ...getProducts.size })
-  },
-  computed: {
-    getProductsData() {
-      return Object.assign({}, { ...this.getProducts })
-    },
-    sizes() {
-      return Object.assign({}, { ...this.getProducts.size })
-    },
   },
   methods: {
     getSize(size) {
