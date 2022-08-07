@@ -1,14 +1,16 @@
 <template>
-  <div>
+  <div v-if="cartItems">
     <v-container class="mt-15">
-      <v-row>
+      <v-row class="mt-15">
         <v-col cols="7">
           <div v-for="cartData in cartItems" :key="cartData._id">
             <v-row class="">
               <v-col cols="3">
-                <v-img :src="cartData.img[0]" class="image"></v-img>
+                <div class="image-container">
+                  <v-img :src="cartData.img[0]" class="image"></v-img>
+                </div>
               </v-col>
-              <v-col cols="9">
+              <v-col cols="9" class="d-flex flex-column justify-space-between">
                 <div>
                   <div class="d-flex justify-space-between">
                     <h4>{{ cartData.title }}</h4>
@@ -22,6 +24,7 @@
                     </h4>
                   </div>
                   <p class="mb-0">{{ cartData.description }}</p>
+
                   <div class="d-flex align-center">
                     <p class="mr-5 mb-0">Size : 6</p>
                     <div>
@@ -34,15 +37,17 @@
                       >
                     </div>
                   </div>
-                  <v-btn icon @click="deleteCartItem(cartData._id)">
-                    <v-icon>mdi-trash-can-outline</v-icon>
-                  </v-btn>
                 </div>
+
+                <v-btn icon @click="deleteCartItem(cartData._id)">
+                  <v-icon>mdi-trash-can-outline</v-icon>
+                </v-btn>
               </v-col>
             </v-row>
+            <v-divider class="mt-8 mb-8"> </v-divider>
           </div>
         </v-col>
-        <v-col cols="4" offset="1">
+        <v-col cols="3" offset="1">
           <div class="summary">
             <h4 class="mb-5">Summary</h4>
             <p>
@@ -88,15 +93,11 @@ export default {
       this.quantity++
     },
     deleteCartItem(id) {
-      // console.log(id)
-
-      const old = this.cartItems
-      console.log(typeof old)
-      const newCart = old.splice((item) => {
+      const old = Object.assign([], this.cartItems)
+      const newCart = old.filter((item) => {
         return item._id !== id
       })
-      console.log(newCart)
-      // this.$store.dispatch('removeCartData', newCart)
+      this.$store.dispatch('removeCartData', newCart)
     },
   },
 }
@@ -107,9 +108,14 @@ export default {
   justify-content: space-between;
 }
 
+.image-container {
+  height: 200px;
+  width: 190px;
+}
+
 .image {
-  max-width: 250px;
-  max-height: 150px;
+  height: 100%;
+  width: 100%;
   object-fit: contain;
 }
 </style>

@@ -34,9 +34,31 @@ export const mutations = {
   },
   cartData: (state, cartData) => {
     // const oldData = JSON.parse(localStorage.getItem('toCart') || '[]')
+
     state.cartData.push(cartData)
 
     localStorage.setItem('toCart', JSON.stringify(state.cartData))
+
+    //  console.log(cartData.size)
+    //  const oldData = JSON.parse(localStorage.getItem('toCart') || '[]')
+    //  if (oldData.length === 0) {
+    //    state.cartData.push(cartData)
+
+    //    localStorage.setItem('toCart', JSON.stringify(state.cartData))
+    //  } else {
+    //    const oldData = JSON.parse(localStorage.getItem('toCart') || '[]')
+    //    const objIndex = oldData.findIndex((obj) => obj._id === cartData._id)
+    //    console.log('Before update: ', oldData[objIndex])
+
+    //    oldData[objIndex].size = cartData.size
+
+    //    console.log('After update: ', oldData[objIndex])
+
+    //    console.log(oldData, 'mutation')
+    //    state.cartData.push(cartData)
+
+    //    localStorage.setItem('toCart', JSON.stringify(state.cartData))
+    //  }
   },
   initializeCart: (state, filter) => {
     state.cartData = filter
@@ -76,15 +98,11 @@ export const actions = {
   },
 
   initializeCart({ commit }, cartData) {
+    console.log(cartData, 'intiti')
     commit('initializeCart', cartData)
   },
-  async removeCartData({ commit }, id) {
-    const old = await JSON.parse(localStorage.getItem('toCart'))
-    const filtered = old.filter((item) => {
-      return item._id === id
-    })
-    console.log(filtered)
-    localStorage.setItem('greetings', JSON.stringify(filtered))
-    commit('initializeCart', filtered)
+  removeCartData({ commit }, data) {
+    localStorage.setItem('toCart', JSON.stringify(data))
+    commit('initializeCart', data)
   },
 }

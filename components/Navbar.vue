@@ -52,8 +52,8 @@ export default {
       return this.$store.state.cartData.length
     },
   },
-  mounted() {
-    const cart = JSON.parse(localStorage.getItem('toCart') || '[]')
+  async mounted() {
+    const cart = await JSON.parse(localStorage.getItem('toCart') || '[]')
     this.$store.dispatch('initializeCart', cart)
   },
   methods: {
