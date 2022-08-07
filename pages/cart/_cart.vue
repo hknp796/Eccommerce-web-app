@@ -59,7 +59,14 @@
               Total <span>₹ {{ totalPrice + 50 }}</span>
             </p>
             <v-divider> </v-divider>
-            <v-btn block class="mt-8" height="50" dark color="black" rounded
+            <v-btn
+              block
+              class="mt-8"
+              height="50"
+              dark
+              color="black"
+              rounded
+              to="/login"
               >Place Order</v-btn
             >
           </div>
