@@ -47,8 +47,17 @@ export default {
     }
   },
   methods: {
-    login() {
+    async login() {
       console.log(this.loginForm)
+      try {
+        const response = await this.$auth.loginWith('local', {
+          data: this.loginForm,
+        })
+        this.$router.push('/')
+        console.log(response)
+      } catch (err) {
+        console.log(err)
+      }
     },
   },
 }

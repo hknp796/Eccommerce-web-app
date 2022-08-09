@@ -5,12 +5,12 @@
         <v-col cols="7">
           <div v-for="cartData in cartItems" :key="cartData._id">
             <v-row class="">
-              <v-col cols="3">
+              <v-col cols="4">
                 <div class="image-container">
                   <v-img :src="cartData.img[0]" class="image"></v-img>
                 </div>
               </v-col>
-              <v-col cols="9" class="d-flex flex-column justify-space-between">
+              <v-col cols="7" class="d-flex flex-column justify-space-between">
                 <div>
                   <div class="d-flex justify-space-between">
                     <h4>{{ cartData.title }}</h4>
