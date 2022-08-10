@@ -53,7 +53,6 @@ export default {
         const response = await this.$auth.loginWith('local', {
           data: this.loginForm,
         })
-        this.$router.push('/')
         console.log(response)
       } catch (err) {
         console.log(err)
@@ -65,7 +64,7 @@ export default {
 
 <style scoped>
 .wrapper {
-  height: 80%;
+  height: 100%;
 }
 
 .form {
