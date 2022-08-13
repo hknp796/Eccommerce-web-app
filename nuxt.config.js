@@ -42,6 +42,10 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
   ],
+  axios: {
+    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
+    baseURL: 'http://localhost:8080',
+  },
   auth: {
     strategies: {
       local: {
@@ -54,28 +58,24 @@ export default {
         },
         user: {
           property: 'user',
-          autoFetch: false,
+          autoFetch: true,
         },
         //      refreshToken: {  // it sends request automatically when the access token expires, and its expire time has set on the Back-end and does not need to we set it here, because is useless
         //        property: "refresh_token", // property name that the Back-end sends for you as a refresh token for saving on localStorage and cookie of user browser
         //        data: "refresh_token", // data can be used to set the name of the property you want to send in the request.
         //      },
         endpoints: {
-          login: { url: '/login', method: 'post' },
+          login: { url: '/api/login', method: 'post' },
           logout: { url: '/api/auth/logout', method: 'post' },
           user: { url: '/api/auth/user', method: 'get' },
         },
       },
     },
   },
-  router: {
-    middleware: ['auth'],
-  },
+  // router: {
+  //   middleware: ['auth'],
+  // },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: 'http://localhost:8080',
-  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

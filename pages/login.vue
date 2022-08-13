@@ -53,7 +53,8 @@ export default {
         const response = await this.$auth.loginWith('local', {
           data: this.loginForm,
         })
-        console.log(response)
+        console.log(response.data.token)
+        // this.$router.push('/cart')
       } catch (err) {
         console.log(err)
       }

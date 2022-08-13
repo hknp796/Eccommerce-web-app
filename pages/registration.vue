@@ -4,7 +4,7 @@
       <h3 class="text-center mb-10">BECOME A MEMBER</h3>
       <v-form ref="form" lazy-validation class="form">
         <v-text-field
-          v-model="registrationform.name"
+          v-model="registrationform.email"
           :counter="10"
           placeholder="Email Address"
           required
@@ -12,7 +12,7 @@
         ></v-text-field>
 
         <v-text-field
-          v-model="registrationform.email"
+          v-model="registrationform.password"
           placeholder="Password"
           required
           outlined
@@ -63,8 +63,15 @@ export default {
     }
   },
   methods: {
-    submitRegistration() {
+    async submitRegistration() {
       console.log(this.registrationform)
+      const user = await this.$axios.$post('/api/signup', {
+        data: this.registrationform,
+      })
+      if (user.token) {
+        this.$router.push('/')
+      }
+      console.log(user)
     },
   },
 }
