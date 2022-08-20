@@ -57,6 +57,13 @@
 </template>
 <script>
 export default {
+  middleware({ store, redirect }) {
+    // If the user is not authenticated
+    if (store.state.auth.loggedIn) {
+      return redirect('/')
+    }
+  },
+  // middleware: 'authenticated',
   data() {
     return {
       registrationform: {},
@@ -64,14 +71,19 @@ export default {
   },
   methods: {
     async submitRegistration() {
-      console.log(this.registrationform)
-      const user = await this.$axios.$post('/api/signup', {
-        data: this.registrationform,
-      })
-      if (user.token) {
-        this.$router.push('/')
+      try {
+        await this.$axios.$post('/api/signup', {
+          data: this.registrationform,
+        })
+        await this.$auth.loginWith('local', {
+          data: {
+            email: this.registrationform.email,
+            password: this.registrationform.password,
+          },
+        })
+      } catch (error) {
+        console.log(error)
       }
-      console.log(user)
     },
   },
 }

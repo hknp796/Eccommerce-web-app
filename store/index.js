@@ -98,7 +98,6 @@ export const actions = {
   },
 
   initializeCart({ commit }, cartData) {
-    console.log(cartData, 'intiti')
     commit('initializeCart', cartData)
   },
   removeCartData({ commit }, data) {

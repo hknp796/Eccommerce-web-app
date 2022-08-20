@@ -39,6 +39,13 @@
 </template>
 <script>
 export default {
+  middleware({ store, redirect }) {
+    // If the user is not authenticated
+    if (store.state.auth.loggedIn) {
+      return redirect('/')
+    }
+  },
+  // middleware: 'guest',
   data() {
     return {
       loginForm: {},
@@ -50,11 +57,11 @@ export default {
     async login() {
       console.log(this.loginForm)
       try {
-        const response = await this.$auth.loginWith('local', {
+        await this.$auth.loginWith('local', {
           data: this.loginForm,
         })
-        console.log(response.data.token)
-        // this.$router.push('/cart')
+
+        this.$router.push('/Checkout')
       } catch (err) {
         console.log(err)
       }
