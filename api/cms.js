@@ -56,7 +56,7 @@ export async function fetchKidsProducts() {
   throw new Error(`${response.data}`)
 }
 export async function fetchSingleProduct(id) {
-  const response = await axios.get(url(`/${id}`))
+  const response = await axios.get(url(`/Product/${id}`))
 
   if (response.status === 200) {
     return response.data

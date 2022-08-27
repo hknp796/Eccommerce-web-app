@@ -66,7 +66,7 @@
               dark
               color="black"
               rounded
-              to="/login"
+              to="/Checkout"
               >Place Order</v-btn
             >
           </div>

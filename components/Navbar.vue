@@ -1,5 +1,38 @@
 <template>
   <div>
+    <div class="topNav d-flex justify-end ma-2">
+      <div v-if="isLoggedIn" class="d-flex align-center">
+        <span>{{ user.firstName }} {{ user.lastName }}</span>
+        <v-menu open-on-hover bottom offset-y min-width="300">
+          <template #activator="{ on, attrs }">
+            <v-btn v-bind="attrs" icon v-on="on">
+              <v-icon>mdi-account-outline</v-icon>
+            </v-btn>
+          </template>
+
+          <v-list>
+            <v-list-item link>
+              <v-list-item-title><h3>Account</h3></v-list-item-title>
+            </v-list-item>
+            <v-list-item v-for="(item, index) in items" :key="index" link>
+              <v-list-item-title @click="logout">{{
+                item.title
+              }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </div>
+      <div v-else class="d-flex align-center">
+        <nuxt-link to="/registration" class="link mx-2 text-center">
+          <p class="ma-0">Join Us</p>
+        </nuxt-link>
+        <div class="vl"></div>
+        <nuxt-link to="/login" class="link mx-2">
+          <p class="ma-0">Sign In</p>
+        </nuxt-link>
+      </div>
+    </div>
+
     <div class="d-flex align-center justify-space-around mt-13">
       <nuxt-link to="/" class="link">
         <h1>SOLO</h1>
@@ -45,11 +78,24 @@
 <script>
 export default {
   data() {
-    return {}
+    return {
+      items: [
+        { title: 'Profile' },
+        { title: 'Order' },
+        { title: 'Favorites' },
+        { title: 'Logout' },
+      ],
+    }
   },
   computed: {
     cartCount() {
       return this.$store.state.cartData.length
+    },
+    isLoggedIn() {
+      return this.$store.state.auth.loggedIn
+    },
+    user() {
+      return this.$auth.user
     },
   },
   async mounted() {
@@ -59,6 +105,9 @@ export default {
   methods: {
     toCart() {
       this.$router.push(`/cart`)
+    },
+    logout() {
+      this.$auth.logout()
     },
   },
 }
@@ -72,5 +121,10 @@ export default {
 .link {
   text-decoration: none !important;
   color: black;
+}
+
+.vl {
+  border-left: 3px solid #646464;
+  height: 15px;
 }
 </style>
