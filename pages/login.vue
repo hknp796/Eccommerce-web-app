@@ -15,6 +15,7 @@
         required
         outlined
         hide-details="true"
+        @keypress.enter="login"
       ></v-text-field>
       <div class="d-flex align-center justify-space-between">
         <v-checkbox
@@ -55,7 +56,6 @@ export default {
   },
   methods: {
     async login() {
-      console.log(this.loginForm)
       try {
         await this.$auth.loginWith('local', {
           data: this.loginForm,

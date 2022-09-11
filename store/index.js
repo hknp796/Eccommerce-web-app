@@ -5,6 +5,7 @@ import {
   fetchMenProducts,
   fetchWomenProducts,
   fetchKidsProducts,
+  sendCartData,
 } from '@/api/cms'
 
 export const state = () => ({
@@ -94,6 +95,7 @@ export const actions = {
     ctx.commit('kidsProducts', kidsProducts)
   },
   async addToCart({ commit }, cartData) {
+    sendCartData(cartData)
     await commit('cartData', cartData)
   },
 
