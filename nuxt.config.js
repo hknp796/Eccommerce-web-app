@@ -21,7 +21,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['@/api/cms.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -58,7 +58,7 @@ export default {
         },
         user: {
           property: 'user',
-          autoFetch: true,
+          // autoFetch: true,
         },
         //      refreshToken: {  // it sends request automatically when the access token expires, and its expire time has set on the Back-end and does not need to we set it here, because is useless
         //        property: "refresh_token", // property name that the Back-end sends for you as a refresh token for saving on localStorage and cookie of user browser

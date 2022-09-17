@@ -1,4 +1,9 @@
-import axios from 'axios'
+let axios = null
+
+export default function ({ $axios }) {
+  axios = $axios
+}
+
 function baseUrl() {
   return 'http://localhost:8080/api'
 }

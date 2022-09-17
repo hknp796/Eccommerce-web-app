@@ -88,14 +88,10 @@ export default {
       })
 
       this.getProductsData.size = this.sizeSelected
+      console.log(this.getProductsData, 'get')
       if (!exists) {
-        console.log(this.$auth.$state, 'auth')
-        if (this.$auth.$state.loggedIn) {
-          this.getProductsData.user_id = this.$auth.$state.user._id
-          await this.$store.dispatch('addToCart', this.getProductsData)
-        } else {
-          await this.$store.dispatch('addToCart', this.getProductsData)
-        }
+        await this.$store.dispatch('addToCart', this.getProductsData)
+
         this.isSizeClicked = 0
       } else {
         !exists ? alert('Please Select Size') : alert('Already Added to Cart')
