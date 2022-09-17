@@ -55,6 +55,7 @@ export default {
       isSizeClicked: 0,
       getProducts: [],
       sizeSelected: '',
+      cart: [],
     }
   },
   computed: {
@@ -67,6 +68,7 @@ export default {
   },
 
   async mounted() {
+    console.log(this.$auth.$state.loggedIn)
     this.getProducts = await this.$store.dispatch(
       'fetchSingleproduct',
       this.$route.params.id
@@ -88,14 +90,20 @@ export default {
       })
 
       this.getProductsData.size = this.sizeSelected
-      console.log(this.getProductsData, 'get')
-      if (!exists) {
+
+      if (!exists && !this.$auth.$state.loggedIn) {
         await this.$store.dispatch('addToCart', this.getProductsData)
 
         this.isSizeClicked = 0
-      } else {
-        !exists ? alert('Please Select Size') : alert('Already Added to Cart')
       }
+
+      if (!exists && this.$auth.$state.loggedIn) {
+        this.$store.dispatch('sendAfterLogin', this.getProductsData)
+      }
+      //  else {
+      //   this.$store.dispatch('addToCart', this.getProductsData)
+      //   !exists ? alert('Please Select Size') : alert('Already Added to Cart')
+      // }
     },
   },
 }

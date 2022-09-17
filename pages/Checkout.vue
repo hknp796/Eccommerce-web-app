@@ -4,11 +4,10 @@
       <v-row class="justify-center">
         <v-col cols="5">
           <h3 class="mb-10">Enter your name and address:</h3>
-          <v-form ref="form" v-model="valid" lazy-validation>
+          <v-form ref="form" lazy-validation>
             <v-text-field
               v-model="checkout.firstName"
               :counter="10"
-              :rules="nameRules"
               label="First Name"
               required
               outlined
@@ -16,7 +15,6 @@
 
             <v-text-field
               v-model="checkout.lastName"
-              :rules="emailRules"
               label="Last Name"
               required
               outlined
@@ -24,7 +22,6 @@
             ><v-text-field
               v-model="checkout.addressOne"
               :counter="10"
-              :rules="nameRules"
               label="Address Line 1"
               required
               outlined
@@ -32,7 +29,6 @@
 
             <v-text-field
               v-model="checkout.addressTwo"
-              :rules="emailRules"
               label="Address Line 2"
               required
               outlined
@@ -40,7 +36,6 @@
             ><v-text-field
               v-model="checkout.addressThree"
               :counter="10"
-              :rules="nameRules"
               label="Address Line 3"
               required
               outlined
@@ -49,7 +44,6 @@
               <v-col>
                 <v-text-field
                   v-model="checkout.postCode"
-                  :rules="emailRules"
                   label="Postal Code"
                   required
                   outlined
@@ -59,7 +53,6 @@
               <v-col>
                 <v-text-field
                   v-model="checkout.locality"
-                  :rules="emailRules"
                   label="Locality"
                   required
                   outlined
@@ -72,7 +65,6 @@
                 <v-select
                   v-model="checkout.states"
                   :items="states"
-                  :rules="[(v) => !!v || 'Item is required']"
                   label="State"
                   required
                   outlined
@@ -86,25 +78,22 @@
               </v-col>
             </v-row>
 
-            <v-checkbox
+            <!-- <v-checkbox
               v-model="checkbox"
-              :rules="[(v) => !!v || 'You must agree to continue!']"
               label="Save this Addres to my profile"
               required
               hide-details="true"
             ></v-checkbox>
             <v-checkbox
               v-model="checkbox"
-              :rules="[(v) => !!v || 'You must agree to continue!']"
               label="Make this my preferred address"
               required
-            ></v-checkbox>
+            ></v-checkbox> -->
           </v-form>
           <h3 class="mb-7">What's your contact information</h3>
           <v-text-field
             v-model="checkout.email"
             :counter="10"
-            :rules="nameRules"
             label="Email"
             required
             outlined
@@ -112,18 +101,16 @@
           <v-text-field
             v-model="checkout.phone"
             :counter="10"
-            :rules="nameRules"
             label="Mobile"
             required
             outlined
           ></v-text-field>
           <v-checkbox
             v-model="isTermsChecked"
-            :rules="[(v) => !!v || 'You must agree to continue!']"
             label="Term and conditions"
             required
           ></v-checkbox>
-          <v-btn
+          <!-- <v-btn
             rounded
             width="100%"
             height="60"
@@ -132,7 +119,7 @@
             dark
             @click="getCheckoutForm"
             >continue</v-btn
-          >
+          > -->
         </v-col>
         <v-col cols="3" offset="2">
           <div class="summary">

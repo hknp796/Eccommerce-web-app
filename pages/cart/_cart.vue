@@ -91,9 +91,7 @@ export default {
       return this.cartItems.reduce((acc, item) => acc + item.price, 0)
     },
   },
-  mounted() {
-    console.log(this.$store.state.auth.loggedIn, 'mounted')
-  },
+
   methods: {
     quantityDecrease() {
       if (this.quantity === 1) return

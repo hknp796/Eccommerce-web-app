@@ -37,7 +37,6 @@ export const mutations = {
     // const oldData = JSON.parse(localStorage.getItem('toCart') || '[]')
 
     state.cartData.push(cartData)
-
     localStorage.setItem('toCart', JSON.stringify(state.cartData))
 
     //  console.log(cartData.size)
@@ -94,9 +93,14 @@ export const actions = {
     const kidsProducts = await fetchKidsProducts()
     ctx.commit('kidsProducts', kidsProducts)
   },
-  async addToCart({ commit }, cartData) {
-    sendCartData(cartData)
-    await commit('cartData', cartData)
+  addToCart({ commit }, cartData) {
+    // await sendCartData(cartData)
+    commit('cartData', cartData)
+  },
+
+  async sendAfterLogin({ commit }, cartData) {
+    console.log(cartData, 'cms')
+    await sendCartData(cartData)
   },
 
   initializeCart({ commit }, cartData) {

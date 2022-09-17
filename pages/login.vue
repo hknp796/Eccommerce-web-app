@@ -52,11 +52,11 @@ export default {
       loginForm: {},
       // why valid is needed
       valid: true,
-      cartData: '',
+      cartData: [],
     }
   },
   mounted() {
-    this.cartData = JSON.parse(localStorage.getItem('toCart') || '[]')
+    this.cartData = JSON.parse(localStorage.getItem('toCart')) || []
   },
   methods: {
     async login() {
@@ -64,9 +64,8 @@ export default {
         await this.$auth.loginWith('local', {
           data: this.loginForm,
         })
-        console.log(this.cartData, 'cart')
-
-        this.$store.dispatch('addToCart', this.cartData)
+        const id = this.cartData.map((item) => item._id)
+        this.$store.dispatch('sendAfterLogin', id)
 
         this.$router.push('/Checkout')
       } catch (err) {
