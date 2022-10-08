@@ -99,8 +99,8 @@ export const actions = {
   },
 
   async sendAfterLogin({ commit }, cartData) {
-    console.log(cartData, 'cms')
     await sendCartData(cartData)
+    commit('cartData', cartData)
   },
 
   initializeCart({ commit }, cartData) {

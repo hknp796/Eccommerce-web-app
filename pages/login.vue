@@ -53,6 +53,8 @@ export default {
       // why valid is needed
       valid: true,
       cartData: [],
+      item: [],
+      productId: {},
     }
   },
   mounted() {
@@ -64,8 +66,8 @@ export default {
         await this.$auth.loginWith('local', {
           data: this.loginForm,
         })
-        const id = this.cartData.map((item) => item._id)
-        this.$store.dispatch('sendAfterLogin', id)
+        const productId = this.cartData.map(({ _id }) => _id)
+        this.$store.dispatch('sendAfterLogin', productId)
 
         this.$router.push('/Checkout')
       } catch (err) {

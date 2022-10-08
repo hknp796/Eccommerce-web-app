@@ -70,7 +70,7 @@ export async function fetchSingleProduct(id) {
   throw new Error(`${response.data}`)
 }
 export async function sendCartData(data) {
-  const response = await axios.post(url('/cart'), data)
+  const response = await axios.post(url('/cart'), { product_ids: data })
 
   if (response.status === 200) {
     return response.data
