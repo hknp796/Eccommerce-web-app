@@ -219,20 +219,22 @@ export default {
   },
   methods: {
     async getCheckoutForm() {
-      // const v = this
+      const userEmail = this.$auth.$state.user.email
+
       const data = {
         amount: this.totalPrice,
-        name: 'hari',
-        email: 'hak',
-        phone: '9946',
+        name: this.$auth.$state.user.name,
+        email: userEmail + '@gmail.com',
+        phone: '919496652881',
       }
       const create = await this.$axios.post('/api/create', data)
-      console.log(create, 'res')
+
       const options = {
         key: 'rzp_test_CqnjbVrtqPZfFb',
         order_id: data.id,
         amount: data.amount * 100,
         currency: create.currency,
+        name: 'Acme Corp',
         description: 'Payment description',
 
         prefill: {
@@ -242,15 +244,9 @@ export default {
         },
 
         handler: async (response) => {
-          console.log('response')
-
           try {
-            console.log('handler')
-            const data = await this.$axios.post('/api/payment', response)
-            console.log({ data })
-          } catch (error) {
-            console.log(error)
-          }
+            await this.$axios.post('/api/payment', response)
+          } catch (error) {}
         },
 
         theme: {
@@ -259,12 +255,8 @@ export default {
       }
 
       const rzp = new window.Razorpay(options)
-      console.log({ rzp })
-      rzp.open()
-    },
 
-    verifyMethod() {
-      console.log('verfy')
+      rzp.open()
     },
   },
 }

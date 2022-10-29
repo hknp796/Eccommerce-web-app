@@ -70,9 +70,7 @@ export default {
         // this.$store.dispatch('sendAfterLogin', productId)
 
         this.$router.push('/Checkout')
-      } catch (err) {
-        console.log(err)
-      }
+      } catch (err) {}
     },
   },
 }
