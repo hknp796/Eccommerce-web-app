@@ -1,6 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+  ssr: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - ecommerce-front-end',
@@ -15,6 +16,9 @@ export default {
       { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    script: [
+      { src: 'https://checkout.razorpay.com/v1/checkout.js', defer: true },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css

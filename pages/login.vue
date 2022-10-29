@@ -66,8 +66,8 @@ export default {
         await this.$auth.loginWith('local', {
           data: this.loginForm,
         })
-        const productId = this.cartData.map(({ _id }) => _id)
-        this.$store.dispatch('sendAfterLogin', productId)
+        // const productId = this.cartData.map(({ _id }) => _id)
+        // this.$store.dispatch('sendAfterLogin', productId)
 
         this.$router.push('/Checkout')
       } catch (err) {

@@ -110,16 +110,9 @@
             label="Term and conditions"
             required
           ></v-checkbox>
-          <!-- <v-btn
-            rounded
-            width="100%"
-            height="60"
-            :class="{ button: !isTermsChecked }"
-            :color="!isTermsChecked ? button : ''"
-            dark
-            @click="getCheckoutForm"
+          <v-btn rounded width="100%" height="60" dark @click="getCheckoutForm"
             >continue</v-btn
-          > -->
+          >
         </v-col>
         <v-col cols="3" offset="2">
           <div class="summary">
@@ -173,6 +166,7 @@ export default {
   middleware: 'auth',
   data() {
     return {
+      script: [{ src: 'https://checkout.razorpay.com/v1/checkout.js' }],
       checkout: {},
       states: [
         'Andhra Pradesh',
@@ -224,8 +218,53 @@ export default {
     },
   },
   methods: {
-    getCheckoutForm() {
-      console.log(this.checkout)
+    async getCheckoutForm() {
+      // const v = this
+      const data = {
+        amount: this.totalPrice,
+        name: 'hari',
+        email: 'hak',
+        phone: '9946',
+      }
+      const create = await this.$axios.post('/api/create', data)
+      console.log(create, 'res')
+      const options = {
+        key: 'rzp_test_CqnjbVrtqPZfFb',
+        order_id: data.id,
+        amount: data.amount * 100,
+        currency: create.currency,
+        description: 'Payment description',
+
+        prefill: {
+          name: data.name,
+          email: data.email,
+          contact: data.phone,
+        },
+
+        handler: async (response) => {
+          console.log('response')
+
+          try {
+            console.log('handler')
+            const data = await this.$axios.post('/api/payment', response)
+            console.log({ data })
+          } catch (error) {
+            console.log(error)
+          }
+        },
+
+        theme: {
+          color: 'grey', // Set your website theme color
+        },
+      }
+
+      const rzp = new window.Razorpay(options)
+      console.log({ rzp })
+      rzp.open()
+    },
+
+    verifyMethod() {
+      console.log('verfy')
     },
   },
 }
