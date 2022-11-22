@@ -1,11 +1,72 @@
 <template>
   <div>
-    <div>
-      <v-btn color="success" dark @click="drawer = !drawer">
-        Import shoes
-      </v-btn>
-      <v-navigation-drawer v-model="drawer" app right temporary>
+    <div class="d-flex" v-if="isMobile">
+      <nuxt-link to="/" class="link mt-3 ml-3">
+        <h1>SOLO</h1>
+      </nuxt-link>
+      <div class="d-flex ml-auto mt-3">
+        <v-icon size="30" @click="toCart"> mdi-shopping-outline</v-icon>
+        <div class="smallscreen">
+          <v-text-field
+            prepend-inner-icon="mdi-magnify"
+            filled
+            rounded
+            dense
+            placeholder="Search"
+            hide-details="true"
+            class="topsearch"
+          ></v-text-field>
+        </div>
+
+        <v-btn
+          color="success"
+          dark
+          @click="drawer = !drawer"
+          v-if="isMobile"
+          icon
+          right
+        >
+          <v-icon>mdi-hamburger</v-icon>
+        </v-btn>
+      </div>
+      <!-- <v-icon v-if="!searchClicked" @click="searchClicked = !searchClicked"
+        >mdi-magnify</v-icon
+      > -->
+
+      <v-navigation-drawer
+        v-model="drawer"
+        app
+        right
+        temporary
+        class="d-flex flex-column"
+      >
+        <v-list-item class="d-flex justify-end">
+          <v-btn icon @click="drawer = !drawer">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-list-item>
         <v-list nav dense>
+          <div v-if="isLoggedIn" class="d-flex align-center ml-2">
+            <span>{{ user.firstName }} {{ user.lastName }}</span>
+            <v-menu open-on-hover bottom offset-y min-width="300">
+              <template #activator="{ on, attrs }">
+                <v-btn v-bind="attrs" icon v-on="on">
+                  <v-icon>mdi-account-outline</v-icon>
+                </v-btn>
+              </template>
+
+              <v-list>
+                <v-list-item link>
+                  <v-list-item-title><h3>Account</h3></v-list-item-title>
+                </v-list-item>
+                <v-list-item v-for="(item, index) in items" :key="index" link>
+                  <v-list-item-title @click="logout">{{
+                    item.title
+                  }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </div>
           <v-list-item-group active-class="deep-purple--text text--accent-4">
             <v-list-item>
               <div class="">
@@ -22,9 +83,18 @@
             </v-list-item>
           </v-list-item-group>
         </v-list>
+        <div class="d-flex align-center">
+          <nuxt-link to="/registration" class="link mx-2 text-center">
+            <p class="ma-0">Join Us</p>
+          </nuxt-link>
+          <div class="vl"></div>
+          <nuxt-link to="/login" class="link mx-2">
+            <p class="ma-0">Sign In</p>
+          </nuxt-link>
+        </div>
       </v-navigation-drawer>
     </div>
-    <div>
+    <div v-if="!isMobile">
       <div class="topNav d-flex justify-end ma-2">
         <div v-if="isLoggedIn" class="d-flex align-center">
           <span>{{ user.firstName }} {{ user.lastName }}</span>
@@ -57,13 +127,12 @@
           </nuxt-link>
         </div>
       </div>
-      {{ isMobile }}
 
       <div class="d-flex align-center justify-space-around mt-13">
         <nuxt-link to="/" class="link">
           <h1>SOLO</h1>
         </nuxt-link>
-        <div class="d-flex">
+        <div class="d-flex" v-if="!isMobile">
           <nuxt-link class="link" to="/menProducts">
             <h4>Men</h4>
           </nuxt-link>
@@ -106,7 +175,8 @@
 export default {
   data() {
     return {
-      drawer: true,
+      drawer: false,
+      searchClicked: false,
       items: [
         { title: 'Profile' },
         { title: 'Order' },
@@ -158,5 +228,9 @@ export default {
 .vl {
   border-left: 3px solid #646464;
   height: 15px;
+}
+
+.smallscreen {
+  width: 200px !important;
 }
 </style>
