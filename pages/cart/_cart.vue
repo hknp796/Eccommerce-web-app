@@ -2,10 +2,10 @@
   <div v-if="cartItems">
     <v-container class="mt-15">
       <v-row class="mt-15">
-        <v-col cols="7">
+        <v-col sm="12" md="6">
           <div v-for="cartData in cartItems" :key="cartData._id">
             <v-row class="">
-              <v-col cols="4">
+              <v-col sm="12" md="4">
                 <div class="image-container">
                   <v-img :src="cartData.img[0]" class="image"></v-img>
                 </div>
@@ -47,7 +47,7 @@
             <v-divider class="mt-8 mb-8"> </v-divider>
           </div>
         </v-col>
-        <v-col cols="3" offset="1">
+        <v-col offset="1" sm="12" md="3">
           <div class="summary">
             <h4 class="mb-5">Summary</h4>
             <p>
@@ -116,10 +116,10 @@ export default {
   justify-content: space-between;
 }
 
-.image-container {
+/* .image-container {
   height: 200px;
   width: 190px;
-}
+} */
 
 .image {
   height: 100%;

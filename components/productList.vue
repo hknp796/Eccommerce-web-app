@@ -2,7 +2,7 @@
   <div>
     <v-container>
       <v-row class="mt-16">
-        <v-col cols="3">
+        <v-col sm="6" md="3">
           <v-list>
             <v-list-group v-for="item in items" :key="item.title">
               <template #activator>
@@ -22,12 +22,12 @@
             </v-list-group>
           </v-list>
         </v-col>
-        <v-col cols="9">
+        <v-col sm="6" md="8">
           <v-row>
             <v-col
               v-for="product in products"
               :key="product._id"
-              cols="4"
+              md="6"
               @click="singleProduct(product._id, product.gender)"
             >
               <v-img :src="product.img[0]" width="100%" height="auto"></v-img>

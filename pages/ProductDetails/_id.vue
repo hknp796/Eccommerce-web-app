@@ -2,18 +2,16 @@
   <div v-show="getProductsData" class="wrapper mt-10">
     <v-container>
       <v-row>
-        <v-col cols="7" class="ml-10">
+        <v-col sm="12" md="6" class="">
           <div class="images">
             <v-img
               v-for="(image, index) in getProductsData.img"
               :key="index"
               :src="image"
-              width="400"
-              height="450"
             ></v-img>
           </div>
         </v-col>
-        <v-col cols="3" class="ml-10">
+        <v-col sm="6" md="3" class="ml-5 mr-5">
           <h2>{{ getProductsData.title }}</h2>
           <p>{{ getProductsData.description }}</p>
           <h4>₹ {{ getProductsData.price }}</h4>

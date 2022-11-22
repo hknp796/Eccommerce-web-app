@@ -2,7 +2,7 @@
   <div class="mt-10">
     <v-container>
       <v-row class="justify-center">
-        <v-col cols="5">
+        <v-col sm="12" md="5">
           <h3 class="mb-10">Enter your name and address:</h3>
           <v-form ref="form" lazy-validation>
             <v-text-field
@@ -114,7 +114,7 @@
             >continue</v-btn
           >
         </v-col>
-        <v-col cols="3" offset="2">
+        <v-col offset="2" sm="12" md="3">
           <div class="summary">
             <h4 class="mb-5">Order Summary</h4>
             <p>
