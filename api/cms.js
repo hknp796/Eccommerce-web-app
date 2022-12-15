@@ -5,7 +5,7 @@ export default function ({ $axios }) {
 }
 
 function baseUrl() {
-  return 'http://localhost:8080/api'
+  return 'https://ecommerce-d0yo.onrender.com/api'
 }
 
 function url(path) {
