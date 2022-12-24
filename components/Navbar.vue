@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="d-flex" v-if="isMobile">
+    <div v-if="isMobile" class="d-flex">
       <nuxt-link to="/" class="link mt-3 ml-3">
         <h1>SOLO</h1>
       </nuxt-link>
@@ -19,12 +19,12 @@
         </div>
 
         <v-btn
+          v-if="isMobile"
           color="success"
           dark
-          @click="drawer = !drawer"
-          v-if="isMobile"
           icon
           right
+          @click="drawer = !drawer"
         >
           <v-icon>mdi-hamburger</v-icon>
         </v-btn>
@@ -132,7 +132,7 @@
         <nuxt-link to="/" class="link">
           <h1>SOLO</h1>
         </nuxt-link>
-        <div class="d-flex" v-if="!isMobile">
+        <div v-if="!isMobile" class="d-flex">
           <nuxt-link class="link" to="/menProducts">
             <h4>Men</h4>
           </nuxt-link>

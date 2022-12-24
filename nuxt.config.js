@@ -66,9 +66,15 @@ export default {
         //        data: "refresh_token", // data can be used to set the name of the property you want to send in the request.
         //      },
         endpoints: {
-          login: { url: '/api/login', method: 'post' },
+          login: {
+            url: 'https://ecommerce-d0yo.onrender.com/api/login',
+            method: 'post',
+          },
           logout: false,
-          user: { url: '/api/user', method: 'get' },
+          user: {
+            url: 'https://ecommerce-d0yo.onrender.com/api/user',
+            method: 'get',
+          },
         },
       },
     },
