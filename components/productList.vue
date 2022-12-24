@@ -76,11 +76,8 @@ export default {
   },
 
   methods: {
-    check(e) {
-      console.log(e, this.newone)
-    },
+    check(e) {},
     singleProduct(id, gender) {
-      console.log(id)
       this.$router.push(`/ProductDetails/${id}`)
     },
   },

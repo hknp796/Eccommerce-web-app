@@ -66,7 +66,6 @@ export default {
   },
 
   async mounted() {
-    console.log(this.$auth.$state.loggedIn)
     this.getProducts = await this.$store.dispatch(
       'fetchSingleproduct',
       this.$route.params.id

@@ -13,7 +13,7 @@
             <v-img
               :src="image"
               aspect-ratio="1.8"
-              @click="clicked(item._id)"
+              @click="clicked(item)"
             ></v-img>
           </v-col>
         </v-row>
@@ -33,7 +33,7 @@
             <v-img
               :src="image"
               aspect-ratio=".8"
-              @click="clicked(item._id)"
+              @click="clicked(item)"
             ></v-img>
           </v-col>
         </v-row>
@@ -62,8 +62,16 @@ export default {
   },
 
   methods: {
-    clicked(id) {
-      this.$router.push('menProducts')
+    clicked(item) {
+      if (item.gender === 'women') {
+        this.$router.push('womenProducts')
+      }
+      if (item.gender === 'men') {
+        this.$router.push('menProducts')
+      }
+      if (item.gender === 'kids') {
+        this.$router.push('kidsProducts')
+      }
     },
   },
 }
