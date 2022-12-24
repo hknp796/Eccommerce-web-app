@@ -227,7 +227,10 @@ export default {
         email: userEmail + '@gmail.com',
         phone: '919496652881',
       }
-      const create = await this.$axios.post('/api/create', data)
+      const create = await this.$axios.post(
+        'https://ecommerce-d0yo.onrender.com/api/create',
+        data
+      )
 
       const options = {
         key: 'rzp_test_CqnjbVrtqPZfFb',
@@ -245,7 +248,10 @@ export default {
 
         handler: async (response) => {
           try {
-            await this.$axios.post('/api/payment', response)
+            await this.$axios.post(
+              'https://ecommerce-d0yo.onrender.com/api/payment',
+              response
+            )
           } catch (error) {}
         },
 
