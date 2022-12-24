@@ -147,6 +147,7 @@
         <div class="d-flex justify-space-between">
           <div class="text-field">
             <v-text-field
+              v-model="searchQuery"
               prepend-inner-icon="mdi-magnify"
               filled
               rounded
@@ -172,6 +173,7 @@
 </template>
 
 <script>
+import { searchProducts } from '../api/cms'
 export default {
   data() {
     return {
@@ -183,8 +185,10 @@ export default {
         { title: 'Favorites' },
         { title: 'Logout' },
       ],
+      searchQuery: '',
     }
   },
+
   computed: {
     isMobile() {
       return this.$vuetify.breakpoint.xsOnly
@@ -198,6 +202,11 @@ export default {
     },
     user() {
       return this.$auth.user
+    },
+  },
+  watch: {
+    searchQuery() {
+      searchProducts(this.searchQuery)
     },
   },
   async mounted() {
