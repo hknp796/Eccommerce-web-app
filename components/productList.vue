@@ -70,20 +70,20 @@ export default {
           title: 'Gender',
         },
       ],
-      size: '',
-      newone: [],
-      checked: '',
       searchItem: '',
       fullProducts: '',
       selectedItems: [],
     }
   },
 
-  mounted() {
-    this.fullProducts = JSON.parse(JSON.stringify(this.products))
+  created() {
     this.$nuxt.$on('search', (a) => {
       this.searchHandler(a)
     })
+  },
+
+  mounted() {
+    this.fullProducts = JSON.parse(JSON.stringify(this.products))
   },
 
   methods: {

@@ -70,10 +70,6 @@ export default {
       'fetchSingleproduct',
       this.$route.params.id
     )
-    // console.log(getProducts)
-    // console.log({ ...getProducts })
-    // this.getProductsData = Object.assign({}, { ...getProducts })
-    // this.sizes = Object.assign({}, { ...getProducts.size })
   },
   methods: {
     getSize(size) {
