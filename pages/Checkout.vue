@@ -1,5 +1,11 @@
 <template>
   <div class="mt-10">
+    <div class="d-flex justify-end">
+      <v-alert v-if="orderAlert" type="success" width="400"
+        >Order Placed Successfully</v-alert
+      >
+    </div>
+
     <v-container>
       <v-row class="justify-center">
         <v-col sm="12" md="5">
@@ -207,6 +213,7 @@ export default {
         'Puducherry',
       ],
       isTermsChecked: false,
+      orderAlert: false,
     }
   },
   computed: {
@@ -252,7 +259,13 @@ export default {
               'https://ecommerce-d0yo.onrender.com/api/payment',
               response
             )
-          } catch (error) {}
+          } catch (error) {
+            this.orderAlert = true
+            setTimeout(() => {
+              this.orderAlert = false
+              this.$router.push('/')
+            }, 1500)
+          }
         },
 
         theme: {

@@ -2,9 +2,10 @@
   <div>
     <div v-if="isMobile" class="d-flex">
       <nuxt-link to="/" class="link mt-3 ml-3">
-        <h1>SOLO</h1>
+        <!-- <h1>SOLO</h1> -->
+        <img src="@/assets/nikelogo.png" height="60" width="60" />
       </nuxt-link>
-      <div class="d-flex ml-auto mt-3">
+      <div class="d-flex ml-auto mt-3 align-center">
         <v-icon size="30" @click="toCart"> mdi-shopping-outline</v-icon>
         <div class="smallscreen">
           <v-text-field
@@ -15,6 +16,7 @@
             placeholder="Search"
             hide-details="true"
             class="topsearch"
+            @keypress.enter="searchHandler"
           ></v-text-field>
         </div>
 
@@ -130,7 +132,8 @@
 
       <div class="d-flex align-center justify-space-around mt-13">
         <nuxt-link to="/" class="link">
-          <h1>SOLO</h1>
+          <!-- <h1>SOLO</h1> -->
+          <img src="@/assets/nikelogo.png" height="100" width="90" />
         </nuxt-link>
         <div v-if="!isMobile" class="d-flex">
           <nuxt-link class="link" to="/menProducts">
@@ -174,7 +177,6 @@
 </template>
 
 <script>
-import { searchProducts } from '../api/cms'
 export default {
   data() {
     return {
@@ -205,11 +207,7 @@ export default {
       return this.$auth.user
     },
   },
-  // watch: {
-  //   searchQuery() {
-  //     searchProducts(this.searchQuery)
-  //   },
-  // },
+
   async mounted() {
     const cart = await JSON.parse(localStorage.getItem('toCart') || '[]')
     this.$store.dispatch('initializeCart', cart)
@@ -222,7 +220,9 @@ export default {
       this.$auth.logout()
     },
     searchHandler() {
-      searchProducts(this.searchQuery)
+      const searchArray = []
+      searchArray.push(this.searchQuery)
+      this.$nuxt.$emit('search', searchArray)
     },
   },
 }

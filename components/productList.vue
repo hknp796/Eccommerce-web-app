@@ -70,13 +70,16 @@ export default {
           title: 'Gender',
         },
       ],
-      size: '',
-      newone: [],
-      checked: '',
       searchItem: '',
       fullProducts: '',
       selectedItems: [],
     }
+  },
+
+  created() {
+    this.$nuxt.$on('search', (a) => {
+      this.searchHandler(a)
+    })
   },
 
   mounted() {
@@ -84,7 +87,7 @@ export default {
   },
 
   methods: {
-    async selectedFilter(fitlerValue, child) {
+    async selectedFilter(fitlerValue) {
       if (this.selectedItems.includes(fitlerValue)) {
         const index = this.selectedItems.indexOf(fitlerValue)
         this.selectedItems.splice(index, 1)
@@ -96,6 +99,10 @@ export default {
 
     singleProduct(id) {
       this.$router.push(`/ProductDetails/${id}`)
+    },
+
+    async searchHandler(a) {
+      this.fullProducts = await searchProducts(a)
     },
   },
 }

@@ -4,8 +4,7 @@ export default {
   ssr: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - ecommerce-front-end',
-    title: 'ecommerce-front-end',
+    title: 'Nike',
     htmlAttrs: {
       lang: 'en',
     },
@@ -15,7 +14,8 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/png', href: '/tablogo.png' }],
+
     script: [
       { src: 'https://checkout.razorpay.com/v1/checkout.js', defer: true },
     ],
@@ -67,14 +67,14 @@ export default {
         //      },
         endpoints: {
           login: {
-            // url: 'https://ecommerce-d0yo.onrender.com/api/login',
-            url: 'http://localhost:8080/api',
+            url: 'https://ecommerce-d0yo.onrender.com/api/login',
+            // url: 'http://localhost:8080/api/login',
             method: 'post',
           },
           logout: false,
           user: {
-            // url: 'https://ecommerce-d0yo.onrender.com/api/user',
-            url: 'http://localhost:8080/api',
+            url: 'https://ecommerce-d0yo.onrender.com/api/user',
+            // url: 'http://localhost:8080/api/user',
             method: 'get',
           },
         },
