@@ -147,12 +147,14 @@
         <div class="d-flex justify-space-between">
           <div class="text-field">
             <v-text-field
+              v-model="searchQuery"
               prepend-inner-icon="mdi-magnify"
               filled
               rounded
               dense
               placeholder="Search"
               hide-details="true"
+              @keypress.enter="searchHandler"
             ></v-text-field>
           </div>
           <v-icon class="ml-6 mr-6"> mdi-heart-outline </v-icon>
@@ -172,6 +174,7 @@
 </template>
 
 <script>
+import { searchProducts } from '../api/cms'
 export default {
   data() {
     return {
@@ -183,8 +186,10 @@ export default {
         { title: 'Favorites' },
         { title: 'Logout' },
       ],
+      searchQuery: '',
     }
   },
+
   computed: {
     isMobile() {
       return this.$vuetify.breakpoint.xsOnly
@@ -200,6 +205,11 @@ export default {
       return this.$auth.user
     },
   },
+  // watch: {
+  //   searchQuery() {
+  //     searchProducts(this.searchQuery)
+  //   },
+  // },
   async mounted() {
     const cart = await JSON.parse(localStorage.getItem('toCart') || '[]')
     this.$store.dispatch('initializeCart', cart)
@@ -210,6 +220,9 @@ export default {
     },
     logout() {
       this.$auth.logout()
+    },
+    searchHandler() {
+      searchProducts(this.searchQuery)
     },
   },
 }

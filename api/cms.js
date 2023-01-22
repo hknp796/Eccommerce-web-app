@@ -5,7 +5,7 @@ export default function ({ $axios }) {
 }
 
 function baseUrl() {
-  return 'https://ecommerce-d0yo.onrender.com/api'
+  return 'http://localhost:8080/api'
 }
 
 function url(path) {
@@ -71,6 +71,15 @@ export async function fetchSingleProduct(id) {
 }
 export async function sendCartData(data) {
   const response = await axios.post(url('/cart'), { product_ids: data })
+
+  if (response.status === 200) {
+    return response.data
+  }
+
+  throw new Error(`${response.data}`)
+}
+export async function searchProducts(data) {
+  const response = await axios.post(url('/search'), { search: data })
 
   if (response.status === 200) {
     return response.data

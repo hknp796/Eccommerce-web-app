@@ -13,10 +13,9 @@
 
               <v-list-item v-for="child in item.items" :key="child.title">
                 <v-checkbox
-                  v-model="newone"
                   :label="child.title"
                   hide-details="true"
-                  @change="check(child.title)"
+                  @change="selectedFilter(child.title, item.title)"
                 ></v-checkbox>
               </v-list-item>
             </v-list-group>
@@ -25,7 +24,7 @@
         <v-col sm="6" md="8">
           <v-row>
             <v-col
-              v-for="product in products"
+              v-for="product in fullProducts"
               :key="product._id"
               md="6"
               @click="singleProduct(product._id, product.gender)"
@@ -42,6 +41,7 @@
   </div>
 </template>
 <script>
+import { searchProducts } from '../api/cms'
 export default {
   props: {
     products: { type: Array },
@@ -71,13 +71,30 @@ export default {
         },
       ],
       size: '',
-      newone: '',
+      newone: [],
+      checked: '',
+      searchItem: '',
+      fullProducts: '',
+      selectedItems: [],
     }
   },
 
+  mounted() {
+    this.fullProducts = JSON.parse(JSON.stringify(this.products))
+  },
+
   methods: {
-    check(e) {},
-    singleProduct(id, gender) {
+    async selectedFilter(fitlerValue, child) {
+      if (this.selectedItems.includes(fitlerValue)) {
+        const index = this.selectedItems.indexOf(fitlerValue)
+        this.selectedItems.splice(index, 1)
+      } else {
+        this.selectedItems.push(fitlerValue)
+      }
+      this.fullProducts = await searchProducts(this.selectedItems)
+    },
+
+    singleProduct(id) {
       this.$router.push(`/ProductDetails/${id}`)
     },
   },
