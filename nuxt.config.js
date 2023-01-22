@@ -68,13 +68,13 @@ export default {
         endpoints: {
           login: {
             // url: 'https://ecommerce-d0yo.onrender.com/api/login',
-            url: 'http://localhost:8080/api',
+            url: 'http://localhost:8080/api/login',
             method: 'post',
           },
           logout: false,
           user: {
             // url: 'https://ecommerce-d0yo.onrender.com/api/user',
-            url: 'http://localhost:8080/api',
+            url: 'http://localhost:8080/api/user',
             method: 'get',
           },
         },

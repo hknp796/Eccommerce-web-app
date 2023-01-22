@@ -174,7 +174,6 @@
 </template>
 
 <script>
-import { searchProducts } from '../api/cms'
 export default {
   data() {
     return {
@@ -205,11 +204,7 @@ export default {
       return this.$auth.user
     },
   },
-  // watch: {
-  //   searchQuery() {
-  //     searchProducts(this.searchQuery)
-  //   },
-  // },
+
   async mounted() {
     const cart = await JSON.parse(localStorage.getItem('toCart') || '[]')
     this.$store.dispatch('initializeCart', cart)
@@ -222,7 +217,9 @@ export default {
       this.$auth.logout()
     },
     searchHandler() {
-      searchProducts(this.searchQuery)
+      const searchArray = []
+      searchArray.push(this.searchQuery)
+      this.$nuxt.$emit('search', searchArray)
     },
   },
 }
